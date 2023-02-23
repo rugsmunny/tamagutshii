@@ -117,14 +117,14 @@ function interactWithTama(event, tamaFetus) {
 function subtractTamaHealthInterval(tamaFetus, tamaData, tamaBtns, tamaContainer){
 
     setInterval( happinessInterval => {
-        tamaFetus.setHappinessStat( tamaFetus.getHappinessStat() - 1 );
         tamaData[1].innerHTML = `Happiness : ` + tamaFetus.getHappinessStat();
+        tamaFetus.setHappinessStat( tamaFetus.getHappinessStat() - 1 );
         checkTamaHealth(tamaFetus, tamaBtns, tamaContainer, happinessInterval );
     }, 1000);
 
     setInterval( hungerInterval => {
-        tamaFetus.setHungerStat( tamaFetus.getHungrynessStat() - 1 );
         tamaData[2].innerHTML = `Hunger : ` + tamaFetus.getHungrynessStat();
+        tamaFetus.setHungerStat( tamaFetus.getHungrynessStat() - 1 );
         checkTamaHealth(tamaFetus, tamaBtns, tamaContainer, hungerInterval );
     }, 2000);
 
