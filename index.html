@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="mainScript/main.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <img id="gif" src="images/gif.gif" alt="" />
+      <h1 id="title">Tamagotchi City</h1>
+    </div>
+
+    <form>
+      <input
+        id="inputText"
+        type="text"
+        name="inputText"
+        placeholder="Enter name..."
+        required
+      />
+      <div id="errorMessage"></div>
+      <br />
+      <p id="chooseYourClass">Choose your class:</p>
+      <select name="select" id="select">
+        <option id="theFabolous" value="The Fabolous">The Fabolous</option>
+        <option id="theInsane" value="The Insane">The Insane</option>
+        <option id="theSeeker" value="The Seeker">The Seeker</option>
+        <option id="theDreamer" value="The Dreamer">The Dreamer</option>
+      </select>
+      <br />
+
+      <button id="addTamaButton">Add tamagotchi</button>
+      <hr />
+    </form>
+  </body>
+</html>
