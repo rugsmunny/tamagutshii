@@ -1,8 +1,8 @@
 import {Tamagotchi} from "../modules/tamagotchi.js";
 
 const errorMessage = document.getElementById("errorMessage");
-const select = document.getElementById("select");
-const inputText = document.getElementById("inputText");
+const classSelected = document.getElementById("select");
+const nameInput = document.getElementById("inputText");
 const allBtns = document.querySelectorAll('button');
 let killTamaText = document.createElement("h1");
 
@@ -10,28 +10,35 @@ document.getElementById("addTamaButton").addEventListener("click", deliverTama);
 
 
 function deliverTama(event){
+    
     event.preventDefault();
+    
     if ( checkStringForErrors() ) {
         printNameInputErrorMsg(checkStringForErrors());
         return;
     }
+    
     const tamaFetus = new Tamagotchi(10, 10);
     const tamaContainer = createTamaContainer();
-    const tamaData = setTamaData(tamaFetus);
+    const tamaData = createTamaDataPElement(tamaFetus);
     const tamaBtns = createTamaBtns(event, tamaFetus);
+    
     tamaBtns.forEach(btn => btn.addEventListener("click", event => interactWithTama(event, tamaFetus)));
+    
     subtractTamaHealthInterval(tamaFetus, tamaData, tamaBtns, tamaContainer);
+    
     tamaData.forEach(element => tamaContainer.append(element));
     tamaBtns.forEach(element => tamaContainer.append(element));
+    
     document.body.append(tamaContainer);
 
 }
 
 function checkStringForErrors() {
-    let message;
-    message = /[^a-zA-ZåäöÅÄÖ]/.test(inputText.value) ? "Use only a-ö, A-Ö. No illegal characters." :
-        inputText.value === "" ? "Fill in your name!" : null;
-    return message;
+    
+    return /[^a-zA-ZåäöÅÄÖ]/.test(nameInput.value) ? "Use only a-ö, A-Ö. No illegal characters." :
+        nameInput.value === "" ? "Fill in your name!" : null;
+    
 }
 
 function printNameInputErrorMsg(message) {
@@ -42,11 +49,10 @@ function printNameInputErrorMsg(message) {
 
 function createTamaContainer() {
 
-
     const tamaContainer = document.createElement("div");
     tamaContainer.setAttribute("id", "tamaContainer");
 
-    switch (select.value) {
+    switch (classSelected.value) {
         case "The Fabolous":
             tamaContainer.style.backgroundColor = "hotpink";
             break;
@@ -64,15 +70,14 @@ function createTamaContainer() {
     return tamaContainer;
 }
 
-function setTamaData(tamaFetus) {
-
+function createTamaDataPElement(tamaFetus) {
 
     const tamaTitle = document.createElement("p");
     const statsForHappiness = document.createElement("p");
     const statsForHungryness = document.createElement("p");
 
-    tamaTitle.innerText = inputText.value + ' ' + select.value;
-    inputText.value = '';
+    tamaTitle.innerText = nameInput.value + ' ' + classSelected.value;
+    nameInput.value = '';
     statsForHappiness.innerHTML = `Happiness : ` + tamaFetus.getHappinessStat();
     statsForHungryness.innerHTML = `Hunger : ` + tamaFetus.getHungrynessStat();
 
@@ -136,20 +141,18 @@ function checkTamaHealth( tamaFetus, tamaBtns, tamaContainer, interval ) {
 }
 
 function disableBtns(){
-    allBtns.forEach(b => b.disabled = true);
+    allBtns.forEach( b => b.disabled = true );
 }
 
 function enableBtns(){
-    allBtns.forEach(b => b.disabled = false);
+    allBtns.forEach( b => b.disabled = false );
 }
 
-function killOffTama( tamaContainer, tamaBtns, dead){
+function killOffTama( tamaContainer, tamaBtns, dead ){
 
-    tamaContainer.innerHTML = "";
-    tamaContainer.append(dead);
+    tamaContainer.innerHTML = dead;
     tamaContainer.style.backgroundColor = "red";
-    tamaBtns.forEach(btn => btn.disabled = true);
-    setTimeout( () => tamaContainer.remove(), 5000);
+    setTimeout( () => tamaContainer.remove(), 5000 );
 
 }
 
