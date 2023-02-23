@@ -150,7 +150,8 @@ function enableBtns(){
 
 function killOffTama( tamaContainer, tamaBtns, dead ){
 
-    tamaContainer.innerHTML = dead;
+    tamaContainer.innerHTML = "";
+    tamaContainer.append(dead);
     tamaContainer.style.backgroundColor = "red";
     setTimeout( () => tamaContainer.remove(), 5000 );
 
